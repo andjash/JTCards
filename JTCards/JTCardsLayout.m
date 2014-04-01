@@ -248,12 +248,9 @@
 {
   UIView *view = recogniser.view;
   CGPoint location = [recogniser translationInView:view];
-  NSLog(@"%f, %f", location.x, location.y);
   
   CGFloat movedTotalDownBy = (location.y - self.startPanLocation.y);
-  NSLog(@"total moved %f", movedTotalDownBy);
   CGFloat movedDownBy = (location.y - self.lastPanLocation.y);
-  NSLog(@"moved %f", movedDownBy);
   
   if (recogniser.state == UIGestureRecognizerStateEnded) {
     if ( movedTotalDownBy > 100) {
