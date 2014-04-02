@@ -146,6 +146,11 @@
   [UIView animateWithDuration:0.3 delay:0.0 options:(UIViewAnimationOptionCurveEaseInOut) animations:^{
     selectedView.center = CGPointMake(selectedView.superview.bounds.size.width/2, selectedView.bounds.size.height/2 + self.topMargin);
   } completion:^(BOOL finished) {
+    for (UIView *view in self.views) {
+      if (view != selectedView) {
+        [self activateTapForView:view];
+      }
+    }
     [self deactivateTapForView:selectedView];
     // let the delegate know that it is in focus
     id delegate = [self delegateForView:selectedView];
