@@ -161,14 +161,13 @@
   NSInteger index = 0;
   for (UIView *view in self.views) {
     if (selectedView != view) {
+      CGFloat viewsYDelta = ((self.peekFromBottom - index * self.collapsedSpacing) / 2);
       [UIView animateWithDuration:0.3 delay:0.0 options:(UIViewAnimationOptionCurveEaseInOut) animations:^{
-        CGFloat moveDownBy = (view.superview.frame.size.height - view.frame.origin.y);
-        view.center = CGPointMake(view.center.x, view.center.y + moveDownBy);
+        view.center = CGPointMake(view.center.x, view.superview.frame.size.height - viewsYDelta - _collapseBounceHeigh);
       } completion:^(BOOL finished) {
         // move up to peek out from bottom
         [UIView animateWithDuration:0.1 animations:^{
-          CGFloat moveUpBy = (self.peekFromBottom - index * self.collapsedSpacing);
-          view.center = CGPointMake(view.center.x, view.center.y - moveUpBy);
+          view.center = CGPointMake(view.center.x, view.superview.frame.size.height - viewsYDelta);
         }];
       }];
       index++;

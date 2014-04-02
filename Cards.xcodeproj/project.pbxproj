@@ -92,7 +92,7 @@
 		8CC5AA0E178AE17E00A83391 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
 		8CC5AA0F178AE17E00A83391 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 		8CC5AA22178AE7A400A83391 /* JTCardsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCardsLayout.h; sourceTree = "<group>"; };
-		8CC5AA23178AE7A400A83391 /* JTCardsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCardsLayout.m; sourceTree = "<group>"; };
+		8CC5AA23178AE7A400A83391 /* JTCardsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = JTCardsLayout.m; sourceTree = "<group>"; };
 		8CC5AA24178AE7A400A83391 /* JTCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCardsViewController.h; sourceTree = "<group>"; };
 		8CC5AA25178AE7A400A83391 /* JTCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCardsViewController.m; sourceTree = "<group>"; };
 		8CC5AA54178B848F00A83391 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };

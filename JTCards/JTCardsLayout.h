@@ -41,6 +41,8 @@
 @property CGFloat collapsedSpacing;
 // the distance from the bottom the top collapsed card peeks out
 @property CGFloat peekFromBottom;
+// the heigh of bounce after cards collapsed
+@property CGFloat collapseBounceHeigh;
 
 // initialise with an array of controllers which are the cards
 // and a container view which should be the view of JTViewController
