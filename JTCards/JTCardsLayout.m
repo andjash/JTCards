@@ -226,7 +226,6 @@
 #pragma mark tap
 - (void) tapRecognised:(UIGestureRecognizer*)recogniser
 {
-  NSLog(@"tapped");
   // show all
   if (!self.showingAll) {
     [self layoutAllAnimated:YES];
