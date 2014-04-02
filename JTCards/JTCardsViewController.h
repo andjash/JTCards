@@ -18,4 +18,6 @@
 - (id) initWithCards:(NSArray*)cardControllers;
 - (id) initWithCards:(NSArray*)cardControllers layout:(JTCardsLayout*)layout;
 
+- (void)setCardControllers:(NSMutableArray *)cardControllers animated:(BOOL)animated;
+
 @end

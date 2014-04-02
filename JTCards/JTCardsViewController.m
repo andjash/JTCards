@@ -54,18 +54,11 @@
   self.view.autoresizesSubviews = NO;
 }
 
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  for (UIViewController *controller in self.cardControllers)
-  {
-    [controller willMoveToParentViewController:self];
-    [self addChildViewController:controller];
-    [self.view addSubview:controller.view];
-    [controller didMoveToParentViewController:self];
-  }
-  
+  [self placeCardsControllersToContainerAnimated:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -83,7 +76,7 @@
   else {
     // the layout was already set so just add the views and container view to it.
     if (!self.layout.delegates || !self.layout.views)
-    [self.layout setupWithControllers:self.cardControllers containerView:self.view];
+      [self.layout setupWithControllers:self.cardControllers containerView:self.view];
   }
   
   [self.layout layoutAllAnimated:NO];
@@ -93,6 +86,43 @@
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void)setCardControllers:(NSMutableArray *)cardControllers {
+  [self setCardControllers:cardControllers animated:NO];
+}
+
+- (void)setCardControllers:(NSMutableArray *)cardControllers animated:(BOOL)animated {
+  NSTimeInterval animationDuration = animated ? 0.3 : 0;
+  for (UIViewController *oldController in _cardControllers) {
+    [oldController willMoveToParentViewController:nil];
+    [UIView animateWithDuration:animationDuration animations:^{
+      oldController.view.alpha = 0;
+    } completion:^(BOOL finished) {
+      [oldController removeFromParentViewController];
+      [oldController.view removeFromSuperview];
+      [oldController didMoveToParentViewController:nil];
+      oldController.view.alpha = 1;
+    }];
+  }
+  _cardControllers = cardControllers;
+  [self.layout setupWithControllers:cardControllers containerView:self.view];
+  [self placeCardsControllersToContainerAnimated:animated];
+}
+
+- (void)placeCardsControllersToContainerAnimated:(BOOL)animated {
+  NSTimeInterval animationDuration = animated ? 0.3 : 0;
+  for (UIViewController *controller in self.cardControllers) {
+    [controller willMoveToParentViewController:self];
+    controller.view.alpha = 0;
+    [self addChildViewController:controller];
+    [self.view addSubview:controller.view];
+    [controller didMoveToParentViewController:self];
+    [UIView animateWithDuration:animationDuration animations:^{
+      controller.view.alpha = 1;
+    }];
+  }
+  [self.layout layoutAllAnimated:animated];
 }
 
 @end
