@@ -230,6 +230,9 @@
 #pragma mark tap
 - (void) tapRecognised:(UIGestureRecognizer*)recogniser
 {
+  if (_behaviourDelegate && ![_behaviourDelegate shouldProcessTapOnView:recogniser.view.superview]) {
+    return;
+  }
   // show all
   if (!self.showingAll) {
     [self layoutAllAnimated:YES];

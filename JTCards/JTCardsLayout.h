@@ -14,6 +14,11 @@
 - (void) movedOutOfFocus;
 @end
 
+@protocol JTCardBehaviourDelegate <NSObject>
+- (BOOL) shouldProcessTapOnView:(UIView *)view;
+@end
+
+
 /* 
  Layout has 2 states
  1. showing all views
@@ -29,6 +34,8 @@
 @property (nonatomic,strong) UIView *containerView;
 // the controller that uses the layout
 @property (nonatomic,strong) NSArray *delegates;
+// delegate that controlls layout behaviour
+@property (nonatomic,strong) id<JTCardBehaviourDelegate> behaviourDelegate;
 
 
 // top margin of focused card
