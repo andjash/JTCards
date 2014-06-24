@@ -80,7 +80,7 @@
 
 - (CGSize) sizeToFit
 {
-  CGFloat bottomPartHeight = [self.views count] * self.collapsedSpacing;
+  CGFloat bottomPartHeight = self.peekFromBottom;
   return CGSizeMake(self.containerSize.width,
                     self.containerSize.height - self.topMargin - bottomPartHeight);
 }
