@@ -13,6 +13,7 @@
 @property CGPoint lastPanLocation;
 @property id<JTCardLayoutDelegate> delegateInFocus;
 @property BOOL tabViewsAdded;
+@property (nonatomic, weak) UIGestureRecognizer *currentPanGesture;
 @end
 
 @implementation JTCardsLayout
@@ -230,6 +231,14 @@
 #pragma mark tap
 - (void) tapRecognised:(UIGestureRecognizer*)recogniser
 {
+    static BOOL ignoringSelection = NO;
+    if (ignoringSelection) {
+        return;
+    }
+    ignoringSelection = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        ignoringSelection = NO;
+    });
   if (_behaviourDelegate && ![_behaviourDelegate shouldProcessTapOnView:recogniser.view.superview]) {
     return;
   }
@@ -252,6 +261,26 @@
 #pragma mark pan
 - (void) panRecognised:(UIPanGestureRecognizer*)recogniser
 {
+    if (self.currentPanGesture && self.currentPanGesture != recogniser) {
+        return;
+    }
+    
+    switch (recogniser.state) {
+        case UIGestureRecognizerStateBegan:
+            self.currentPanGesture = recogniser;
+            break;
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateFailed: {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.currentPanGesture = nil;
+            });
+        }
+            break;
+        default:
+            break;
+    }
+    
   UIView *view = recogniser.view;
   CGPoint location = [recogniser translationInView:view];
   
